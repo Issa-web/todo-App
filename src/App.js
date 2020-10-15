@@ -17,7 +17,15 @@ class App extends Component {
       })
       e.target.reset(); // clear the form after submitting
     }
-    
+  }
+
+  deleteItem = (item,index) => {
+    console.log( "index:",index)
+    let taskArray = [...this.state.toDoList]
+    taskArray.splice(index,1)
+    this.setState({
+      toDoList:taskArray
+    })
   }
 
   render() {
@@ -35,8 +43,19 @@ class App extends Component {
               <button type="submit" className="btn btn-outline-success"> Add</button>
               </div>
             </div>
-  
+            <ul className="list-group">
+              {
+                this.state.toDoList.map((item, index) => 
+              <li key={index} className="list-group-item">
+                {item}
+                <button type="submit" className="btn btn-sm btn-outer-danger float-right" onClick={(event) => this.deleteItem(item, index)}> 
+                delete
+                </button>
+              </li>)
+              }
+            </ul>
           </form>
+          
       </div>
     );
     }
